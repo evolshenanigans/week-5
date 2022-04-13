@@ -1,0 +1,123 @@
+-- Customer Table for Presidents
+CREATE TABLE customer(
+	customer_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(100),
+	last_name VARCHAR(100),
+	email VARCHAR(200),
+	address VARCHAR(150),
+	city VARCHAR(150),
+	customer_state VARCHAR(100),
+	zipcode VARCHAR(50)
+);
+
+-- Orders Table for Presidents
+CREATE TABLE order_(
+	order_id SERIAL PRIMARY KEY,
+	order_date DATE DEFAULT CURRENT_DATE,
+	amount NUMERIC(5,2),
+	customer_id INTEGER,
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
+);
+
+INSERT INTO customer(customer_id,first_name,last_name,email,address,city,customer_state,zipcode)
+VALUES(1,'George','Washington','gwash@usa.gov', '3200 Mt Vernon Hwy', 'Mt Vernon', 'VA', '22121');
+
+INSERT INTO customer(customer_id,first_name,last_name,email,address,city,customer_state,zipcode)
+VALUES(2,'John','Adams','jadams@usa.gov','1200 Hancock', 'Quincy', 'MA','02169');
+
+INSERT INTO customer(customer_id,first_name,last_name,email,address,city,customer_state,zipcode)
+VALUES(3,'Thomas','Jefferson', 'tjeff@usa.gov', '931 Thomas Jefferson Pkway', 'Charlottesville','VA','02169');
+
+INSERt INTO customer(customer_id,first_name,last_name,email,address,city,customer_state,zipcode)
+VALUES(4,'James','Madison', 'jmad@usa.gov', '11350 Conway','Orange','VA','02169');
+
+INSERT INTO customer(customer_id,first_name,last_name,email,address,city,customer_state,zipcode)
+VALUES(5,'James','Monroe','jmonroe@usa.gov','2050 James Monroe Parkway','Charlottesville','VA','02169');
+
+-- INSERT INFO INTO ORDERS TABLE
+
+INSERT INTO order_(order_id,amount,customer_id)
+VALUES(1,234.56,1);
+
+INSERT INTO order_(order_id,amount,customer_id)
+VALUES(2,78.50,3);
+
+INSERT INTO order_(order_id,amount,customer_id)
+VALUES(3,124.00,2);
+
+INSERT INTO order_(order_id,amount,customer_id)
+VALUES(4,65.50,3);
+
+INSERT INTO order_(order_id,amount,customer_id)
+VALUES(5,55.50,NULL);
+
+SELECT *
+FROM order_;
+
+SELECT *
+FROM customer;
+
+--INNER JOIN
+SELECT first_name, last_name, order_date, amount
+FROM customer
+INNER JOIN order_
+ON customer.customer_id = order_.customer_id;
+
+--LEFT JOIN
+SELECT first_name, last_name, order_date, amount
+FROM customer
+LEFT JOIN order_
+ON customer.customer_id = order_.customer_id;
+
+--RIGHT JOIN
+SELECT first_name, last_name, order_date, amount
+FROM customer
+RIGHT JOIN order_
+ON customer.customer_id = order_.customer_id;
+
+--LEFT JOIN WHERE B KEY IS NULL
+SELECT first_name, last_name, order_date, amount
+FROM customer
+LEFT JOIN order_
+ON customer.customer_id = order_.customer_id
+WHERE order_date IS NULL;
+
+--FULL JOIN WHERE KEYS ARE NULL
+SELECT first_name, last_name, order_date, amount
+FROM customer
+FULL OUTER JOIN order_
+ON customer.customer_id = order_.customer_id
+WHERE last_name IS NULL OR amount IS NULL;
+
+
+
+
+--SUBQUERY EXAMPLES
+-- TWO QUERIES SPLIT APART
+-- FIND A CUSTOMER_ID THAT HAS AN AMOUNT GREATER THAN 175 IN TOTAL PAYMENTS
+
+SELECT customer_id, SUM(amount)
+FROM payment
+GROUP BY customer_id
+HAVING SUM(amount) > 175
+ORDER BY SUM(amount) DESC;
+
+
+-- FIND ALL CUSTOMER DATA
+SELECT *
+FROM customer;
+
+--FIND THE CUSTOMERS WITH THAT TOTAL AMOUNT > 175
+SELECT store_id, first_name, last_name
+FROM customer
+WHERE customer_id IN (
+	SELECT customer_id
+	FROM payment
+	GROUP BY customer_id
+	HAVING SUM(amount) > 175
+	ORDER BY SUM(amount) DESC
+)
+GROUP BY store_id, first_name, last_name;
+
+--SECOND SBUQUERY
+--FIND ALL FILMS IN ENGLISH
