@@ -1,0 +1,245 @@
+INSERT INTO concessions(
+	concession_id,
+	concession_type,
+	concession_price
+)VALUES(
+	1,
+	'coke',
+	'07.00'
+);
+
+INSERT INTO concessions(
+	concession_id,
+	concession_type,
+	concession_price
+)VALUES(
+	2,
+	'popcorn',
+	'09.00'
+);
+
+INSERT INTO concessions(
+	concession_id,
+	concession_type,
+	concession_price
+)VALUES(
+	3,
+	'recess pieces',
+	'05.00'
+);
+
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	billing_info
+)VALUES(
+	1,
+	'terrel',
+	'mckinney',
+	'4242-4242-4242-4242 666 01/01'
+);
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	billing_info
+)VALUES(
+	2,
+	'ryan',
+	'rhoades',
+	'4242-4242-4242-4243 667 02/02'
+);
+
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	billing_info
+)VALUES(
+	3,
+	'josh',
+	'gutierrez',
+	'4242-4242-4242-4244 668 03/03'
+);
+
+INSERT INTO movie_company(
+	company_id,
+	company_name
+)VALUES(
+	1,
+	'sony'
+);
+INSERT INTO movie_company(
+	company_id,
+	company_name
+)VALUES(
+	2,
+	'paramont'
+);
+
+INSERT INTO actors(
+	actor_id,
+	actor_name,
+	company_id
+)VALUES(
+	1,
+	'cristoph waltz',
+	2
+);
+
+INSERT INTO actors(
+	actor_id,
+	actor_name,
+	company_id
+)VALUES(
+	2,
+	'johnny depp',
+	1
+);
+
+INSERT INTO actors(
+	actor_id,
+	actor_name,
+	company_id
+)VALUES(
+	3,
+	'oscar isaac',
+	1
+);
+
+INSERT INTO movies(
+	movie_id,
+	movie_title,
+	movie_hall,
+	rating,
+	show_time,
+	show_date,
+	company_id
+)VALUES(
+	1,
+	'inglorious bastards',
+	12,
+	'R',
+	'213000',
+	'20220415',
+	1
+);
+
+INSERT INTO movies(
+	movie_id,
+	movie_title,
+	movie_hall,
+	rating,
+	show_time,
+	show_date,
+	company_id
+)VALUES(
+	1,
+	'inglorious bastards',
+	12,
+	'R',
+	'213000',
+	'20220415',
+	1
+);
+
+INSERT INTO movies(
+	movie_id,
+	movie_title,
+	movie_hall,
+	rating,
+	show_time,
+	show_date,
+	company_id
+)VALUES(
+	1,
+	'inglorious bastards',
+	12,
+	'R',
+	'213000',
+	'20220415',
+	1
+);
+
+INSERT INTO movies(
+	movie_id,
+	movie_title,
+	movie_hall,
+	rating,
+	show_time,
+	show_date,
+	company_id
+)VALUES(
+	1,
+	'inglorious bastards',
+	12,
+	'R',
+	'213000',
+	'20220415',
+	1
+);
+
+INSERT INTO movies(
+	movie_id,
+	movie_title,
+	movie_hall,
+	rating,
+	show_time,
+	show_date,
+	company_id
+)VALUES(
+	2,
+	'matrix',
+	13,
+	'pg-13',
+	'213000',
+	'20220415',
+	2
+);
+
+INSERT INTO tickets(
+    ticket_id,
+    ticket_price,
+    payment_type,
+    customer_id,
+    movie_id
+)VALUES(
+    1,
+    22.00,
+    'credit card',
+    1,
+    1
+);
+
+INSERT INTO tickets(
+    ticket_id,
+    ticket_price,
+    payment_type,
+    customer_id,
+    movie_id
+)VALUES(
+    2,
+    22.00,
+    'credit card',
+    2,
+    1
+);
+
+INSERT INTO tickets(
+    ticket_id,
+    ticket_price,
+    payment_type,
+    customer_id,
+    movie_id
+)VALUES(
+    3,
+    11.00,
+    'cash',
+    3,
+    2
+);
+
+
+--SELECT*
+--FROM tickets;
