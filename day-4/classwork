@@ -1,0 +1,96 @@
+-- explore data in payment table
+SELECT *
+FROM payment;
+
+-- stored procedure example
+--simulate late fee charge
+
+CREATE OR REPLACE PROCEDURE latefee(
+	customer INTEGER,
+	lateFeeAmount DECIMAL
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	-- ADD LATE FEE AMOUNT TO CUSTOMER PAYMENT
+	UPDATE payment
+	SET amount = amount + lateFeeAmount
+	WHERE customer_id = customer;
+	
+	--commit the above statement 
+	COMMIT;
+END;
+$$
+
+
+--CALLING A STORED PROCEDURE
+--CALL latefee(342, 15.00);
+CALL brokenfee(15.00, 2190);
+--VIEW CHANGES FOR CUSTOMER 341
+SELECT *
+FROM payment
+WHERE customer_id = 342;
+
+CREATE OR REPLACE PROCEDURE brokenfee(
+	brokenfeeAmount DECIMAL,
+	rental_ INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	-- ADD LATE FEE AMOUNT TO CUSTOMER PAYMENT
+	UPDATE payment
+	SET amount = amount + brokenfeeAmount
+	WHERE rental_id = rental_
+	;
+	
+	--commit the above statement 
+	COMMIT;
+END;
+$$
+DROP PROCEDURE brokenfee(integer,numeric,integer)
+
+
+
+
+--HOOTIES CODE
+-- create or replace procedure late_fee(
+-- 	late_feeAmount decimal
+-- )
+-- language plpgsql
+-- as $$
+-- begin
+
+-- 	update payment
+-- 	set amount = amount + late_feeAmount
+-- 	where rental_id in(
+-- 		select rental_id
+-- 		from rental
+-- 		where return_date - rental_date > interval '9 days'
+-- 	);
+-- commit;
+-- end;
+-- $$
+-- CALL late_fee(2.01);
+-- select customer_id, rental_id, amount
+-- from payment
+-- where rental_id in (
+-- 	select rental_id
+-- 	from rental
+-- 	where return_date - rental_date > interval '9 days'
+-- );
+
+
+--stored fucntion
+--stored function to insert data into actor table
+CREATE OR REPLACE FUNCTION add_actor(_actor_id INTEGER, _first_name VARCHAR, _last_name VARCHAR, _last_update TIMESTAMP WITHOUT TIME ZONE)
+RETURNS void
+AS $MAIN$
+BEGIN
+	INSERT INTO actor(actor_id, first_name, last_name, last_update)
+	VALUES(_actor_id, _first_name, _last_name, _last_update);
+END;
+$MAIN$
+LANGUAGE plpgsql;
+
+SELECT add_actor(500,'will', 'smith', now()::timestamp);

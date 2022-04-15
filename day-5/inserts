@@ -1,0 +1,61 @@
+CREATE OR REPLACE FUNCTION add_car(
+	_vehicle_id INTEGER,
+	_make VARCHAR(100),
+	_model VARCHAR(100),
+	_year NUMERIC(4)
+	)
+	
+RETURNS void
+AS $MAIN$
+BEGIN
+	INSERT INTO vehicle 
+	VALUES(_vehicle_id, _make, _model, _year);
+END;
+$MAIN$
+LANGUAGE plpgsql;
+
+SELECT add_car(1 , 'Dodge', 'Caravan', 2022);
+SELECT add_car(2, 'toyota', 'prius', 2022 );
+
+INSERT INTO vehicle 
+	VALUES(1, 'Dodge', 'Caravan', 2022);
+INSERT INTO vehicle 
+	VALUES(2, 'Toyota', 'Prius', 2022);
+	
+	
+	
+	
+--MECHANIC ADDITION	
+CREATE OR REPLACE FUNCTION add_mechanic(_mechanic_id INTEGER, _first_name VARCHAR, _last_name VARCHAR)
+RETURNS void
+AS $MAIN$
+BEGIN
+	INSERT INTO mechanic(mechanic_id, first_name, last_name)
+	VALUES(_mechanic_id, _first_name, _last_name);
+END;
+$MAIN$
+LANGUAGE plpgsql;
+
+SELECT add_mechanic(1, 'BIG', 'WILLY')
+SELECT add_mechanic(2, 'BEND', 'DOVER')
+SELECT add_mechanic(3, 'VIN', 'DIESEL')
+
+
+--sales person
+INSERT INTO sales_person(sales_id, first_name, last_name, phone_number)
+VALUES(1, 'ALEX', 'SWIGGUM', '2222222222');
+
+INSERT INTO sales_person(sales_id, first_name, last_name, phone_number)
+VALUES(2, 'DOMINIC', 'FIORELLI', '3333333333');
+
+INSERT INTO sales_person(sales_id, first_name, last_name, phone_number)
+VALUES(3, 'JOSH', 'GUTIERREZ', '4444444444');
+
+INSERT INTO customer(customer_id, first_name, last_name, address)
+VALUES(1, 'KAREN', 'SMITH', '123 FAKE ST')
+
+INSERT INTO customer(customer_id, first_name, last_name, address)
+VALUES(2, 'SPONGEBOB', 'SQUAREPANTS', '124 CONCH ST')
+
+SELECT *
+FROM sales_invoice;
